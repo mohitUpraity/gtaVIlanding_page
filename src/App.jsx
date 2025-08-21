@@ -79,29 +79,31 @@ const App = () => {
           />
         </svg>
       )}
-      <div className="w-screen h-screen">
-        <div className="bg-image absolute">
+      <div className="w-screen h-screen relative overflow-hidden">
+        {/* Background Sky */}
+        <div className="absolute inset-0">
           <img
             src="./cloud-sky.png"
-            width="100%"
-            height="100%"
-            className="object-cover"
+            alt="sky"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div className="buildings-image absolute   ">
+
+        {/* Buildings */}
+        <div className="absolute inset-0">
           <img
             src="./bg-transparent.png"
-            width="100%"
-            height="100%"
-            className="object-cover"
+            alt="buildings"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div className="character-image absolute  ">
+
+        {/* Character */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
           <img
             src="./character-simple.png"
-            width="30%"
-            height="30%"
-            className="object-cover lg:translate-x-[160%] lg:translate-y-[75%]"
+            alt="character"
+            className="w-[30%] h-auto object-contain"
           />
         </div>
       </div>
