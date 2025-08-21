@@ -5,9 +5,7 @@ import { useGSAP } from "@gsap/react";
 const App = () => {
   const [showMain, setShowMain] = useState(false);
   //on main change
-  useEffect(() => {
-    console.log(showMain);
-  }, [showMain]);
+
   //animation of text
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -66,7 +64,14 @@ const App = () => {
           </defs>
           {/* <rect width="100%" height="100%" fill="white" mask="url(#viMask)" /> */}
           <image
-            href="./bg.png"
+            href="./cloud-sky.png"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="xMidYMid slice"
+            mask="url(#viMask)"
+          />
+          <image
+            href="./bg-transparent.png"
             width="100%"
             height="100%"
             preserveAspectRatio="xMidYMid slice"
@@ -74,8 +79,31 @@ const App = () => {
           />
         </svg>
       )}
-      <div>
-        <h1>Main content</h1>
+      <div className="w-screen h-screen">
+        <div className="bg-image absolute">
+          <img
+            src="./cloud-sky.png"
+            width="100%"
+            height="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="buildings-image absolute   ">
+          <img
+            src="./bg-transparent.png"
+            width="100%"
+            height="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="character-image absolute  ">
+          <img
+            src="./character-simple.png"
+            width="30%"
+            height="30%"
+            className="object-cover lg:translate-x-[160%] lg:translate-y-[75%]"
+          />
+        </div>
       </div>
     </div>
   );
