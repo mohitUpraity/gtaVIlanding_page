@@ -4,6 +4,20 @@ import { useGSAP } from "@gsap/react";
 
 const App = () => {
   const [showMain, setShowMain] = useState(false);
+  const [isMainAnimated, setIsMainAnimated] = useState(false);
+  //parallex effect handler
+  // const handleMouseMove = (e) => {
+  //   let x = 1-e.clientX/100;
+  //   console.log(x)
+  // };
+  useGSAP(() => {
+    const main = document.querySelector(".main");
+    main?.addEventListener("mousemove", (e) => {
+      const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+      console.log(xMove);
+    });
+  }, [showMain]);
+
   //on main change
 
   //animation of text
@@ -29,6 +43,31 @@ const App = () => {
     });
     tl.to(".vi-mask-group", { opacity: 0, duration: 0.5, delay: -1 });
   });
+  // after loading main content animation
+  useGSAP(() => {
+    const tl = gsap.timeline({ onComplete: () => {} });
+    tl.from(".sky-layer", {
+      rotate: -50,
+      scale: 4,
+      duration: 2,
+      ease: "power2.out",
+    });
+    tl.from(".buildings-layer", {
+      rotate: -20,
+      scale: 3,
+      duration: 3,
+      delay: -1,
+      ease: "power1.Out",
+    });
+    tl.from(".character-layer", {
+      rotate: -30,
+      scale: 4,
+      duration: 2,
+      delay: -2,
+      ease: "power2.inOut",
+    });
+  });
+
   return (
     <div className="svg fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden text-white bg-black ">
       {!showMain && (
@@ -79,31 +118,31 @@ const App = () => {
           />
         </svg>
       )}
-      <div className="w-screen h-screen relative overflow-hidden">
-        {/* Background Sky */}
-        <div className="absolute inset-0">
-          <img
+      <div className=" main w-screen h-screen relative overflow-hidden bg-black ">
+        {/* Sky Layer */}
+        <div className=" sky-layer absolute inset-0 flex items-center justify-center  bg-[url(./cloud-sky.png)] bg-cover bg-center">
+          {/* <img
             src="./cloud-sky.png"
             alt="sky"
-            className="w-full h-full object-cover"
-          />
+            className="max-w-none w-auto h-full object-cover"
+          /> */}
         </div>
 
-        {/* Buildings */}
-        <div className="absolute inset-0">
-          <img
+        {/* Buildings Layer */}
+        <div className=" buildings-layer absolute inset-0 flex items-center justify-center bg-[url(./bg-transparent.png)] bg-cover bg-center">
+          {/* <img
             src="./bg-transparent.png"
             alt="buildings"
-            className="w-full h-full object-cover"
-          />
+            className="max-w-none w-auto h-full object-cover"
+          /> */}
         </div>
 
-        {/* Character */}
+        {/* Character Layer */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
           <img
             src="./character-simple.png"
             alt="character"
-            className="w-[30%] h-auto object-contain"
+            className="character-layer w-[30vw] h-auto object-contain "
           />
         </div>
       </div>
