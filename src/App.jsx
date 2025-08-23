@@ -5,16 +5,15 @@ import { useGSAP } from "@gsap/react";
 const App = () => {
   const [showMain, setShowMain] = useState(false);
   const [isMainAnimated, setIsMainAnimated] = useState(false);
-  //parallex effect handler
-  // const handleMouseMove = (e) => {
-  //   let x = 1-e.clientX/100;
-  //   console.log(x)
-  // };
+
   useGSAP(() => {
     const main = document.querySelector(".main");
     main?.addEventListener("mousemove", (e) => {
       const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
       console.log(xMove);
+      gsap.to(".character-layer", { x: xMove * 0.8 });
+      gsap.to(".buildings-layer", { x: xMove * 0.4});
+      gsap.to(".sky-layer", { x: xMove * 0.3 });
     });
   }, [showMain]);
 
@@ -129,12 +128,17 @@ const App = () => {
         </div>
 
         {/* Buildings Layer */}
-        <div className=" buildings-layer absolute inset-0 flex items-center justify-center bg-[url(./bg-transparent.png)] bg-cover bg-center">
-          {/* <img
+        <div
+          className="  absolute inset-0 flex items-center justify-center 
+        "
+        >
+          {/* bg-[url(./bg-transparent.png)] bg-cover bg-center */}
+
+          <img
             src="./bg-transparent.png"
             alt="buildings"
-            className="max-w-none w-auto h-full object-cover"
-          /> */}
+            className=" buildings-layer max-w-none w-full h-full object-cover"
+          />
         </div>
 
         {/* Character Layer */}
