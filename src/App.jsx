@@ -12,8 +12,9 @@ const App = () => {
       const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
       console.log(xMove);
       gsap.to(".character-layer", { x: xMove * 0.8 });
-      gsap.to(".buildings-layer", { x: xMove * 0.4});
+      gsap.to(".buildings-layer", { x: xMove * 0.4 });
       gsap.to(".sky-layer", { x: xMove * 0.3 });
+      gsap.to(".main-text", { x: xMove * -1.5 });
     });
   }, [showMain]);
 
@@ -64,6 +65,22 @@ const App = () => {
       duration: 2,
       delay: -2,
       ease: "power2.inOut",
+    });
+    tl.from(".main-text", {
+      // rotate: -30,
+      // y: 200,
+      scale: 10,
+      duration: 2,
+      delay: -2,
+      ease: "power2.inOut",
+    });
+    tl.from(".main-text", {
+      // rotate: -30,
+      y: -40,
+      // scale: 10,
+      duration: 2,
+      delay: 0,
+      ease: "power4.Out",
     });
   });
 
@@ -139,6 +156,23 @@ const App = () => {
             alt="buildings"
             className=" buildings-layer max-w-none w-full h-full object-cover"
           />
+        </div>
+        {/* title layer */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-between font-sans "
+          style={{ fontFamily: "black" }}
+        >
+          <header>
+            <h1 className="text-xl text-center">navbar</h1>
+          </header>
+          <main className=" main-text font-bold text-center flex flex-col gap-3 text-8xl lg:text-[12rem] ">
+            <h1 className="-translate-x-24 underline">grand</h1>
+            <h1 className=" underline">theft</h1>
+            <h1 className="-translate-x-22 underline">auto</h1>
+          </main>
+          <footer>
+            <p className="text-xl text-center">Footer Content</p>
+          </footer>
         </div>
 
         {/* Character Layer */}
